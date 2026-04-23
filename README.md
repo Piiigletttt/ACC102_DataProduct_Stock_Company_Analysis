@@ -1,48 +1,80 @@
 # ACC102_DataProduct_Stock_Company_Analysis
+
 # WRDS Stock Analysis System
 
-## 1. Problem & User
+## 1. Project Overview
 
-Investors, finance students, and researchers often need a fast way to compare multiple companies using both fundamental and technical indicators.  
-This project helps users analyze three selected U.S. stocks through WRDS data by generating valuation tables, profitability metrics, return comparisons, and technical charts.
+The WRDS Stock Analysis System is a Python-based financial analytics tool designed for investors, finance students, and researchers who need a fast and structured way to compare multiple U.S. listed companies.
+
+By connecting directly to WRDS (Wharton Research Data Services), the system retrieves real market and accounting data, then automatically generates valuation metrics, profitability indicators, return comparisons, and technical analysis charts.
+
+Users simply enter three stock tickers and the program performs a full comparative analysis.
 
 ---
 
-## 2. Data
+## 2. Target Users
 
-**Data Source:** WRDS (Wharton Research Data Services)  
-**Databases Used:** CRSP + Compustat  
-**Access Date:** Real-time when user runs the script
+This project is suitable for:
 
-### CRSP Monthly Stock File (crsp.msf)
+- Investors comparing stock opportunities  
+- Finance students learning equity valuation  
+- Researchers conducting company performance analysis  
+- Beginners exploring financial ratios and technical indicators  
 
-Key fields:
+---
 
-- htsymbol
-- permno
-- date
-- prc
-- ret
+## 3. Data Source
 
-Used for:
+**Platform:** WRDS (Wharton Research Data Services)  
+**Databases Used:**
 
-- Stock price
-- Monthly return
-- Technical indicators
+- CRSP Monthly Stock File (`crsp.msf`)
+- CRSP Header File (`crsp.msfhdr`)
+- Compustat Fundamentals Annual (`comp.funda`)
 
-### Compustat Fundamentals Annual (comp.funda)
+**Data Coverage:** January 2024 to present  
+**Access Method:** Real-time query when the script runs
 
-Key fields:
+---
 
-- tic
-- datadate
-- prcc_f
-- csho
-- ceq
-- ni
-- dvc
+## 4. Data Fields Used
 
-Used for:
+## A. CRSP Market Data
+
+Used for stock return and technical analysis.
+
+| Field | Meaning |
+|------|---------|
+| htsymbol | Stock ticker |
+| permno | Security ID |
+| date | Trading month |
+| prc | Stock price |
+| ret | Monthly return |
+
+Used to calculate:
+
+- Monthly return trend
+- Industry average return
+- Moving averages
+- MACD indicators
+
+---
+
+## B. Compustat Fundamental Data
+
+Used for valuation and profitability analysis.
+
+| Field | Meaning |
+|------|---------|
+| tic | Stock ticker |
+| datadate | Financial statement date |
+| prcc_f | Fiscal year-end price |
+| csho | Shares outstanding |
+| ceq | Common equity |
+| ni | Net income |
+| dvc | Dividends |
+
+Used to calculate:
 
 - P/E Ratio
 - P/B Ratio
@@ -51,82 +83,184 @@ Used for:
 
 ---
 
-## 3. Methods (main Python steps)
+## 5. Key Features
 
-1. Prompt user to input WRDS username and password securely.
-2. Ask user to enter three stock tickers.
-3. Pull monthly return data from CRSP since 2024-01-01.
-4. Calculate industry average monthly return.
-5. Pull financial statement data from Compustat.
-6. Convert accounting data into monthly observations using forward-fill logic.
-7. Calculate:
-   - P/E
-   - P/B
-   - Dividend Yield
-   - ROE
-8. Compute technical indicators:
-   - MA5
-   - MA10
-   - MA20
-   - MA30
-   - MACD
-9. Generate tables and line charts for comparison.
+## 1. Stock Return Comparison
+
+Compare monthly returns of three selected companies against industry average.
+
+Output:
+
+- Return tables
+- Line chart: Monthly Return vs Industry Average
 
 ---
 
-## 4. Key Findings 
+## 2. Valuation Analysis
 
-- Users can compare three companies’ monthly stock performance against industry average.
-- Valuation metrics (P/E, P/B) help identify relative overpricing or undervaluation.
-- Dividend Yield highlights shareholder cash return differences.
-- ROE shows profitability and management efficiency across firms.
-- Moving Average and MACD charts help detect momentum and trend signals.
+Calculate and compare:
+
+- Price-to-Earnings Ratio (P/E)
+- Price-to-Book Ratio (P/B)
+
+Output:
+
+- Monthly tables
+- Trend charts
 
 ---
 
-## 5. How to run 
+## 3. Profitability Analysis
 
-### Example input
-WRDS username: yourname
-WRDS password: ********
-Tickers: AAPL,MSFT,GOOGL
+Calculate:
 
-### View Results
-The program will automatically generate:
+- Return on Equity (ROE)
 
-#### Tables
-Monthly P/E
-Monthly P/B
-Monthly Dividend Yield
-Monthly ROE
-Technical indicator tables
-#### Charts
-Monthly Return vs Industry Average
-P/E Trend vs Industry Average
-P/B Trend vs Industry Average
-Dividend Yield Trend vs Industry Average
-ROE Trend vs Industry Average
-Moving Average Charts
-MACD Charts
+Output:
+
+- Monthly ROE table
+- ROE trend chart
+
+---
+
+## 4. Shareholder Return Analysis
+
+Calculate:
+
+- Dividend Yield
+
+Output:
+
+- Dividend Yield table
+- Dividend Yield trend chart
+
+---
+
+## 5. Technical Analysis
+
+Generate common momentum indicators:
+
+- MA5
+- MA10
+- MA20
+- MA30
+- MACD
+- Signal Line
+
+Output:
+
+- Technical indicator tables
+- Moving Average charts
+- MACD charts
+
+---
+
+## 6. Calculation Logic
+
+### Financial Ratios
+
+- EPS = Net Income / Shares Outstanding
+- BVPS = Common Equity / Shares Outstanding
+
+- P/E = Price / EPS
+- P/B = Price / BVPS
+- Dividend Yield = Dividend / Price
+- ROE = Net Income / Common Equity
+
+### Technical Indicators
+- MA5  = 5-period moving average
+- MA10 = 10-period moving average
+- MA20 = 20-period moving average
+- MA30 = 30-period moving average
+
+- MACD = EMA12 - EMA26
+- Signal = 9-period EMA of MACD
+
+---
+
+## 7. How to run 
+
+### Step 1 : Install Packages
+- pip install wrds pandas matplotlib
+
+### Step 2 : Run Python File
+- Stock Company Analysis.ipynb
+
+### Step 3 : Enter Inputs
+- Please enter your WRDS username: yourname
+- Please enter your WRDS password: ********
+- Please input three companies: AAPL,MSFT,GOOGL
+
+---
+
+## 8. Program Output
+- After running, the system automatically generates:
+
+### Tables
+- Monthly P/E
+- Monthly P/B
+- Monthly Dividend Yield
+- Monthly ROE
+- Technical indicator tables
+
+### Charts
+- Monthly Return vs Industry Average
+- P/E Trend vs Industry Average
+- P/B Trend vs Industry Average
+- Dividend Yield Trend vs Industry Average
+- ROE Trend vs Industry Average
+- Moving Average Charts
+- MACD Charts
+
+### Example Use Case
+- Input:
+AAPL, MSFT, GOOGL
+- The user can compare:
+- Which company has stronger profitability
+- Which stock looks more expensive
+- Which company pays higher dividends
+- Which stock has stronger momentum trend
 
 ### Exit Program
-After analysis is complete, the database connection closes automatically:
-"""The database connection has been closed!
-"""
+- After analysis is complete, the database connection closes automatically.
 
-## 6. Product link / Demo
+## 9. Product link / Demo
 
-## 7. Limitations & next step
+---
+
+## 10. Limitations & next step
 
 ### Limitations
-1.Requires active WRDS account access.
-2.Currently supports only three stocks per run.
-3.Uses monthly data rather than daily data.
-4.Industry average is based only on selected sample stocks, not full market universe.
+- Requires active WRDS account access.
+- Currently supports only three stocks per run.
+- Uses monthly data rather than daily data.
+- Industry average is based only on selected sample stocks, not full market universe.
 
-###Next Step
-1.Add Excel / CSV export
-2.Support more stocks
-3.Add RSI / Bollinger Bands
-4.Add portfolio optimization module
-5.Generate automatic PDF reports
+### Future Improvements
+- Add Excel / CSV export
+- Support more stocks
+- Add RSI / Bollinger Bands
+- Add portfolio optimization module
+- Generate automatic PDF reports
+
+---
+
+## 11.Technologies Used
+- Python
+- WRDS API
+- Pandas
+- Matplotlib
+
+---
+
+## 12.Project Value
+- This project combines financial theory + real market data + Python automation into one practical tool.
+- It demonstrates skills in:
+
+- Financial data analysis
+-  SQL data extraction
+- Python programming
+- Data visualization
+- Investment analytics
+
+---
