@@ -181,21 +181,23 @@ Output:
 ## 7. How to run 
 
 ### Step 1 : Install Packages
-- pip install wrds pandas matplotlib
+`pip install wrds pandas matplotlib`
 
 ### Step 2 : Run Python File
 - Stock Company Analysis.ipynb
 
 ### Step 3 : Enter Inputs
-- Please enter your WRDS username: yourname
-- Please enter your WRDS password: ********
-- Please input three companies: AAPL,MSFT,GOOGL
+```python
+Please enter your WRDS username: yourname
+Please enter your WRDS password: ********
+Please input three companies: AAPL,MSFT,GOOGL
+```
 
 ---
 
 ## 8. Program Output
 - After running, the system automatically generates:
-
+```python
 ### Tables
 - Monthly P/E
 - Monthly P/B
@@ -211,10 +213,11 @@ Output:
 - ROE Trend vs Industry Average
 - Moving Average Charts
 - MACD Charts
+```
 
 ### Example Use Case
 - Input:
-AAPL, MSFT, GOOGL
+`AAPL`, `MSFT`, `GOOGL`
 - The user can compare:
 - Which company has stronger profitability
 - Which stock looks more expensive
@@ -224,11 +227,9 @@ AAPL, MSFT, GOOGL
 ### Exit Program
 - After analysis is complete, the database connection closes automatically.
 
-## 9. Product link / Demo
-
 ---
 
-## 10. Limitations & next step
+## 9. Limitations & next step
 
 ### Limitations
 - Requires active WRDS account access.
@@ -245,7 +246,7 @@ AAPL, MSFT, GOOGL
 
 ---
 
-## 11.Technologies Used
+## 10.Technologies Used
 - Python
 - WRDS API
 - Pandas
@@ -253,7 +254,7 @@ AAPL, MSFT, GOOGL
 
 ---
 
-## 12.Project Value
+## 11.Project Value
 - This project combines financial theory + real market data + Python automation into one practical tool.
 - It demonstrates skills in:
 
